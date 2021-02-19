@@ -54,3 +54,14 @@ Sencillo pero potente procesador de texto para almacenar los ADR.
 * Positivo, porque permite el acceso a varios usuarios simultáneamente.
 * Positivo, porque es fácil de usar.
 * Negativo, porque tiene limitaciones de capacidades que pueden afectar según el formato del documento.
+
+
+### Diagrama de Gantt
+
+Herramienta gráfica cuyo objetivo es exponer el tiempo de dedicación previsto para diferentes tareas o actividades a lo largo de un tiempo total determinado.
+
+* Positivo, porque ayuda a establecer plazos realistas.
+* Positivo, porque ayuda a organizar las ideas.
+* Negativo, porque puede llegar a ser muy complejo.
+* Negativo, porque se necesita una actualización constante.
+* Negativo, porque la longitud de la barra no indica la cantidad de trabajo, sino la temporalización.
