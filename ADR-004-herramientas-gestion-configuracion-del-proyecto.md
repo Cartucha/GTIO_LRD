@@ -1,4 +1,4 @@
-# Utilizar herramientas de gestión de la configuración proyecto
+# Utilizar herramientas de gestión de la configuración del proyecto
 
 * Estado: Aceptada
 * Responsables: Pablo Lizarraga Cía, Jon Mikel Merino Ruiz, David Marzo Pérez e Izaskun Rodríguez Villar
