@@ -25,7 +25,7 @@ Se pretende ofrecer un medio de soporte al cliente durante el tiempo de vida út
 
 ## Decisión
 
- Opción elegida: "Correo”, porque satisface todos los factores de decisión y todos los miembros del equipo tienen conocimiento de la herramienta como cuenta para su uso.
+ Opción elegida: "Correo”, porque satisface gran parte de los factores de decisión evaluados y se adapta a las limitaciones con respecto al numero de personas en el equipo.
 
 ## Ventajas y Desventajas de las opciones
 
