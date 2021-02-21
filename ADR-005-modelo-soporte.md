@@ -15,7 +15,7 @@ Se pretende ofrecer un medio de soporte al cliente durante el tiempo de vida út
 * Minimice costes
 * Trato personal
 * Rapidez de respuesta
-* Limitaciones del equipo
+* Compatibilidad con equipos reducidos
 
 ## Opciones Consideradas
 
