@@ -1,4 +1,4 @@
-# Utilizar herramientas de gestión de la configuración del proyecto
+# Modelo de Soporte del Proyecto
 
 * Estado: Aceptada
 * Responsables: Pablo Lizarraga Cía, Jon Mikel Merino Ruiz, David Marzo Pérez e Izaskun Rodríguez Villar
@@ -6,50 +6,60 @@
 
 ## Contexto y Planteamiento del Problema
 
-Queremos emplear herramientas para realizar la gestión de la configuración del proyecto. ¿Cuáles son las herramientas apropiadas para realizar dicha tarea? 
+Se pretende ofrecer un medio de soporte al cliente durante el tiempo de vida útil del proyecto. 
 
 ## Factores en la Decisión
 
 * Fácil de utilizar
-* Control de versiones
-* Soporte de múltiples usuarios
-* Registro de incidencias
+* Accesible
+* Minimice costes
+* Trato personal
+* Rapidez de respuesta
+* Limitaciones del equipo
 
 ## Opciones Consideradas
 
-* GitHub
-* GitLab
-* Subversion
+* Vía telefónica
+* Correo
+* Presencial
 
 ## Decisión
 
- Opción elegida: "GitHub”, porque satisface todos los factores de decisión y todos los miembros del equipo tienen conocimiento de la herramienta como cuenta para su uso.
+ Opción elegida: "Correo”, porque satisface todos los factores de decisión y todos los miembros del equipo tienen conocimiento de la herramienta como cuenta para su uso.
 
 ## Ventajas y Desventajas de las opciones
 
-### GitHub
+### Vía Telefónica
 
-Sistema de gestión de proyectos y control de versiones de código, así como una plataforma de red social diseñada para desarrolladores.
+Servicio de soporte vía telefónica que permite hablar de forma directa con el cliente para resolver sus dudas.
 
-* Positivo, porque tiene búsqueda rápida.
-* Positivo, porque tiene seguimiento de errores.
-* Positivo, porque tiene funciones para la administración de equipos.
-* Negativo, porque tiene limitaciones de tamaño.
+* Positivo, porque permite un trato más personal con el cliente.
+* Positivo, porque permite una respuesta al cliente de forma inmmediata.
+* Positivo, porque permite resolver a distancia las dudas del cliente.
+* Positivo, porque ofrece mayor rapidez a la hora de identificar y solucionar errores.
+* Positivo, porque es accesible a todos los clientes.
+* Positivo, porque minimiza costes en la empresa.
+* Negativo, porque no tiene en cuenta la limitación del numero de personas del equipo.
 
-### GitLab
+### Correo
 
-Servicio web de control de versiones y desarrollo de software colaborativo basado en Git.
+Servicio de soporte online mediante intercambio de mensajes entre el personal de la empresa y el cliente.
 
-* Positivo, porque tiene seguimiento de errores.
-* Positivo, porque opera bajo una licencia de código abierto.
-* Negativo, porque la interfaz es relativamente lenta.
-* Negativo, porque hay frecuentes problemas técnicos con los repositorios.
+* Positivo, porque es accesible a todos los clientes.
+* Positivo, porque permite resolver a distancia las dudas del cliente.
+* Positivo, porque minimiza costes en la empresa.
+* Positivo, porque es facil de usar.
+* Positivo, porque satisface las limitaciones con respecto al numero de personas en el equipo.
+* Negativo, porque la respuesta no es inmediata.
+* Negativo, porque el trato no es tan personal y directo.
 
 
-### Subversion
+### Presencial
 
-Herramienta de control de versiones open source basada en un repositorio cuyo funcionamiento se asemeja enormemente al de un sistema de ficheros.
+Servicio presencial de soporte mediante visitas del personal de la empresa al domicilio del cliente.
 
-* Positivo, porque se sigue la historia de los archivos y directorios a través de copias y renombrados.
-* Positivo, porque permite selectivamente el bloqueo de archivos.
-* Negativo, porque no resuelve el problema de aplicar repetidamente parches entre ramas.
+* Positivo, porque permite un trato más personal con el cliente.
+* Positivo, porque ofrece la mayor rapidez a la hora de identificar y solucionar errores.
+* Negativo, porque supone un mayor coste para la empresa en comparación con las opciones candidatas.
+* Negativo, porque no es accesible a todos los clientes, al menos no de forma inmediata. Necesita cita previa.
+* Negativo, porque no tiene en cuenta la limitación del numero de personas del equipo.
