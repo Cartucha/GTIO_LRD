@@ -32,7 +32,7 @@ externos.
         Colaboración con cliente sobre negociación contractual
         Responder al cambio sobre seguir un plan
    * Sprints 3 semanas
-   * Dalys Martes,Jueves
+   * Dalys Lunes,Miercoles
    * Tablero virtual Trello
    * Master scrum y product owner, rotativo por sprint,para facilitar el aprendizaje
 
