@@ -3,7 +3,7 @@
  * Templates https://adr.github.io/madr/
  * Drive https://drive.google.com/drive/folders/14FYARrjW4wlUrx4jpxEpYIdNMVSHtzu8
  * Redmine
-      * Entorno de Producción http://172.18.69.89   
+      * Entorno de Producción http://172.18.69.89/redmine   
       * Entorno de Desarrollo (Docker) http://172.18.69.89:8080/
 
 #ADRs 
