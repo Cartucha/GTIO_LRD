@@ -1,7 +1,7 @@
 # GTIO_LRD
  * Asignatura https://github.com/aitormendivil/GTIO2021/tree/main/ADR
  * Templates https://adr.github.io/madr/
- * Drive https://drive.google.com/drive/folders/14FYARrjW4wlUrx4jpxEpYIdNMVSHtzu8
+ * Drive https://drive.google.com/drive/folders/1xp7AgkVEKFTVEDlb7SVZxdca_R8idcyn?usp=sharing
  * Redmine
       * Entorno de Producción http://172.18.69.89/redmine   
       * Entorno de Desarrollo (Docker) http://172.18.69.89:8080/
