@@ -16,45 +16,37 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.listen(80, () => {
- console.log("Server running on port 80");
+app.listen(3000, () => {
+ console.log("Server running on port 8080");
 });
 
-app.get('/', function(req, res) { res.send({
-		codigo: 200,
-		mensaje: 'Punto de inicio'
-	});
-});
-
-app.get("/key", (req, res, next) => {
-	// Construir un objeto CLT (cliente interfaz)
-	/*let clt = new CLT(id);
-	clt.connect(host);
-	let op = {
-		type: "GET", // "PUT"
-		args: {
-			key: 'key',
-			value: 'value'
-		}
+app.get('/', function(req, res) { res.send({ codigo: 200, mensaje: 'Punto de inicio' }); });
+app.get("/item/:id", (req, res, next) => {
+	if((!req.params.id && !req.body.id)) { res.send({ codigo: 502, mensaje: 'Falta id en url o como campo'} );} 
+	else {
+		var id = req.params.id || req.body.id;
+		clt.connect(host);
+	    clt.reqCommand({ type: "GET", args: { key: id } });
+		clt.on("ResCommand", (op, res) => {
+			console.log("Respuesta: " + res);
+			res.json({ key: id, value: res });
+		});
 	}
-	op.args.value = (op.type == "GET") ? null : op.args.value;
-	clt.reqCommand(op);
-	clt.on("ResCommand", (op, res) => {
-		console.log("Respuesta: " + res);
-	});
-	*/
-	res.json(['key', req.params.id, 'value', 'pendiente']);
 });
 
-app.post("/key", (req, res, next) => {
-	if(!req.body.nombre || !req.body.apellido) {
-		res.send({ codigo: 502, mensaje: 'El campo nombre y apellido son requeridos' });
-	} else {
-		 var toCreateUpdate = { key: req.body.key, value: req.body.value };
-		 respuesta = {
-		  codigo: 200,
-		  mensaje: 'Clave actualizada ' + toCreateUpdate.key,
-		  respuesta: req.body.value
-		 };
+app.post("/item/:id", (req, res, next) => {
+	if((!req.params.id && !req.body.id)) { res.send({ codigo: 502, mensaje: 'Falta id en url o como campo' });} 
+	else {
+		var id = req.params.id || req.body.id;
+		var value = req.body.value; 
+		clt.connect(host);
+	    clt.reqCommand({ type: "PUT", args: { key: id, value: value} });
+		clt.on("ResCommand", (op, res) => {
+			console.log("Respuesta: " + res);
+			res.json({
+				mensaje: 'Clave actualizada ' + key,
+				value: value
+			});
+		});
 	}
 })	
