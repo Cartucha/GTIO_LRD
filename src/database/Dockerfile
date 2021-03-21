@@ -2,9 +2,8 @@ FROM ubuntu:18.04
 
 WORKDIR /tmp/server
 
-ENV PORT 8080
 ENV INSTANCE_ID 1
-ENV PROXYBACKEND 127.0.0.1:8004 
+ENV PROXYBACKEND proxydown:8008 
 
 RUN apt-get update -y
 RUN apt-get install -y apt-utils
@@ -24,7 +23,4 @@ RUN mv /tmp/server/node_modules/.zmq.DELETE /tmp/server/node_modules/zmq
 #Copiar codigo fuente
 COPY *.js ./
 
-# TODO crear un volumen para la base de datos en lugar de crearla siempre 
-EXPOSE ${PORT} 
-
-CMD node createdb.js db${INSTANCE_ID}/ && node object.js r${INSTANCE_ID} ${PROXYBACKEND} db${INSTANCE_ID}/
+CMD node createdb.js r${INSTANCE_ID}/ && node object.js r${INSTANCE_ID} ${PROXYBACKEND} db${INSTANCE_ID}/

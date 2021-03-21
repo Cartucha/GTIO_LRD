@@ -12,14 +12,14 @@ if (process.argv.length != 6) {
 let id = process.argv[2];
 let hostC = process.argv[3];
 let hostR = process.argv[4];
-let hostT = process.argv[5];
+let hostTOBE = process.argv[5];
 
 let sequenced = []; // vector de comandos secuenciados
 let localseq = 0; // primera position nula de 'sequenced'
 let lastservedseq = -1; // ultimo numero de secuencia utilizado por el manejador
 let mycommands = []; // comandos actualmente a cargo del manejador
 let myreplies = []; // num. secuencia de comandos que espera el manejador
-let ORIDs = ["r1", "r2", "r3"]; // TODO rellenar
+let ORIDs = ["r1"] //TODO Añadir más replicas , "r2", "r3"];
 
 let socketC = zmq.socket("dealer"); // socket para clientes
 socketC.identity = id;
@@ -68,7 +68,7 @@ const find = (cmd, list) => {
 }
 
 let tobe = new TOBE(id); // construir objecto TOBE (interfaz)
-tobe.connect(hostT);
+tobe.connect(hostTOBE);
 
 // Reaccionar a evento TODeliver
 tobe.on("TODeliver", (n, msg) => {

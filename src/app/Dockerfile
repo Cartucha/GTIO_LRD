@@ -4,7 +4,7 @@ WORKDIR /tmp/server
 
 ENV PORT 8080  
 ENV INSTANCE_ID 1
-ENV PROXYFRONTEND 127.0.0.1:8004 
+ENV PROXYFRONTEND proxyup:8001
 
 RUN apt-get update -y
 RUN apt-get install -y apt-utils

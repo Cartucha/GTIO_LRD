@@ -1,12 +1,9 @@
 FROM ubuntu:18.04
 
-WORKDIR /tmp/server
-
-ENV PORT 8080
 ENV INSTANCE_ID 1
-ENV PROXY1 127.0.0.1:8001
-ENV PROXY2 127.0.0.1:8002 
-ENV PROXY3 127.0.0.1:8003  
+ENV PROXYCLIENTES proxyup:8002
+ENV PROXYREPLICAS proxydown:8007 
+ENV HOSTTOBE sequencer:8003
 
 RUN apt-get update -y
 RUN apt-get install -y apt-utils
@@ -22,7 +19,4 @@ RUN npm install --silent zmq
 #Copiar codigo fuente
 COPY *.js ./
 
-# TODO crear un volumen para la base de datos en lugar de crearla siempre 
-EXPOSE ${PORT} 
-
-CMD node handler.js h${INSTANCE_ID}/ && node tobe.js ${PROXY1} ${PROXY3} ${PROXY2}  
+CMD node handler.js h${INSTANCE_ID} ${PROXYCLIENTES} ${PROXYREPLICAS} ${HOSTTOBE}  

@@ -20,6 +20,8 @@
      * index http://172.18.69.89:8000\
 
  # Otros
+ * Ejecutar el conjunto de dockers
+    sudo docker-compose up
  * Ejecutar nodo app (api-rest): 
     * sudo docker run -p 80:8080 -d appImageTag
     * curl -d "value=ejemplo" -X POST http://localhost:80/item/10

@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+  apirest:
+    build: ./src/app/
+    ports:
+      - "80:8080"
+    depends_on:
+      - proxyup
+    links:
+      - proxyup
+  proxyup:
+    build: ./src/proxyup/
+    depends_on:
+      - handler
+    links:
+      - handler
+  handler:
+    build: ./src/handler/
+    depends_on:
+      - proxydown
+      - sequencer
+    links:
+      - proxydown
+      - sequencer
+  sequencer:
+    build: ./src/sequencer/
+  proxydown:
+    build: ./src/proxydown/
+  database:
+    build: ./src/database/ 
+    depends_on:
+      - proxydown
+    links:
+      - proxydown

@@ -21,18 +21,26 @@ app.listen(bindingPort, '0.0.0.0', () => {
  console.log("Server running on port " + bindingPort);
 });
 
+var isDemo = true;
+var data = {key: "value"};
+
 app.get('/', function(req, res) { res.send({ codigo: 200, mensaje: 'Punto de inicio' }); });
 app.get("/item/:id", (req, res, next) => {
 	if((!req.params.id && !req.body.id)) { res.send({ codigo: 502, mensaje: 'Falta id en url o como campo'} );} 
 	else {
 		var id = req.params.id || req.body.id;
-		let clt = new CLT(id);
-		clt.connect(host);
-	    clt.reqCommand({ type: "GET", args: { key: id } });
-		clt.on("ResCommand", (op, res) => {
-			console.log("Respuesta: " + res);
-			res.json({ key: id, value: res });
-		});
+		if (isDemo) {
+			res.json({ key: id, value: data[id+'']+'' });
+		}
+		else {
+			let clt = new CLT(id);
+			clt.connect(host);
+			clt.reqCommand({ type: "GET", args: { key: id } });
+			clt.on("ResCommand", (op, res) => {
+				console.log("Respuesta: " + res);
+				res.json({ key: id, value: res });
+			});
+		}
 	}
 });
 
@@ -41,15 +49,24 @@ app.post("/item/:id", (req, res, next) => {
 	else {
 		var id = req.params.id || req.body.id;
 		var value = req.body.value; 
-		let clt = new CLT(id);
-		clt.connect(host);
-	    clt.reqCommand({ type: "PUT", args: { key: id, value: value} });
-		clt.on("ResCommand", (op, res) => {
-			console.log("Respuesta: " + res);
+		if (isDemo) {
+			data[id+""] = value;
 			res.json({
-				mensaje: 'Clave actualizada ' + key,
-				value: value
+				mensaje: 'Clave actualizada ' + id,
+				value: value + ''
 			});
-		});
+		}
+		else{
+			let clt = new CLT(id);
+			clt.connect(host);
+			clt.reqCommand({ type: "PUT", args: { key: id, value: value} });
+			clt.on("ResCommand", (op, res) => {
+				console.log("Respuesta: " + res);
+				res.json({
+					mensaje: 'Clave actualizada ' + id,
+					value: value
+				});
+			});
+		}
 	}
 })	
