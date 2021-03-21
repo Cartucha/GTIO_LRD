@@ -1,0 +1,11 @@
+CREATE IMAGE
+sudo docker build -t proxyup .
+
+RUN IMAGE
+sudo docker run -p 86:8080 -d proxyup
+
+ADD SERVICE
+curl -i -X POST \
+  --url http://localhost:8001/services/ \
+  --data 'name=proxyup' \
+  --data 'url=http://172.18.69.89:86'

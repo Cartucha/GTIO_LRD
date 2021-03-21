@@ -1,0 +1,11 @@
+CREATE IMAGE
+sudo docker build -t db .
+
+RUN IMAGE
+sudo docker run -p 82:8080 -d db
+
+ADD SERVICE
+curl -i -X POST \
+  --url http://localhost:8001/services/ \
+  --data 'name=db' \
+  --data 'url=http://172.18.69.89:83'

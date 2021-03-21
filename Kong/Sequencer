@@ -1,0 +1,11 @@
+CREATE IMAGE
+sudo docker build -t sq .
+
+RUN IMAGE
+sudo docker run -p 87:8080 -d sq
+
+ADD SERVICE
+curl -i -X POST \
+  --url http://localhost:8001/services/ \
+  --data 'name=sq' \
+  --data 'url=http://172.18.69.89:87'

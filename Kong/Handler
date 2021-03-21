@@ -1,0 +1,24 @@
+CREATE IMAGE
+sudo docker build -t handler .
+
+RUN IMAGE
+sudo docker run -p 84:8080 -d handler
+
+ADD SERVICE
+curl -i -X POST \
+  --url http://localhost:8001/services/ \
+  --data 'name=handler' \
+  --data 'url=http://172.18.69.89:84'
+  
+ADD ROUTERS
+curl -i -X POST \
+  --url http://localhost:8001/services/app/routes \
+  --data name=app-index \
+  --data 'paths[]=/' \
+  --data 'methods[]=GET'
+  
+curl -i -X POST \
+  --url http://localhost:8001/services/app/routes \
+  --data name=app-item \ 
+  --data 'paths[]=/item/\d' \
+  --data 'methods[]=GET'
