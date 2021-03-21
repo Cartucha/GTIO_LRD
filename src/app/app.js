@@ -4,20 +4,21 @@ var express = require("express");
 const bodyParser = require('body-parser');
 
 const CLT = require("./client"); // Importar la interfaz
-if (process.argv.length != 4) {
-	console.log("Uso: " + process.argv[1] + " <identidad> <IP:puerto>");
+if (process.argv.length != 5) {
+	console.log("Uso: " + process.argv[1] + "<bindingPort> <identidad> <IP:puerto>");
 	process.exit(-1);
 }
 
-let id = process.argv[2];
-let host = process.argv[3];
+let bindingPort = process.argv[2]/1;
+let appId = process.argv[3];
+let host = process.argv[4];
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.listen(3000, () => {
- console.log("Server running on port 8080");
+app.listen(bindingPort, '0.0.0.0', () => {
+ console.log("Server running on port " + bindingPort);
 });
 
 app.get('/', function(req, res) { res.send({ codigo: 200, mensaje: 'Punto de inicio' }); });
@@ -25,6 +26,7 @@ app.get("/item/:id", (req, res, next) => {
 	if((!req.params.id && !req.body.id)) { res.send({ codigo: 502, mensaje: 'Falta id en url o como campo'} );} 
 	else {
 		var id = req.params.id || req.body.id;
+		let clt = new CLT(id);
 		clt.connect(host);
 	    clt.reqCommand({ type: "GET", args: { key: id } });
 		clt.on("ResCommand", (op, res) => {
@@ -39,6 +41,7 @@ app.post("/item/:id", (req, res, next) => {
 	else {
 		var id = req.params.id || req.body.id;
 		var value = req.body.value; 
+		let clt = new CLT(id);
 		clt.connect(host);
 	    clt.reqCommand({ type: "PUT", args: { key: id, value: value} });
 		clt.on("ResCommand", (op, res) => {

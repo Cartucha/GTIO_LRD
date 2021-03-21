@@ -16,6 +16,11 @@
 * [ADR-005-modelo-soporte.md](./doc/adr/ADR-005-modelo-soporte.md)
 
  # Otros
+ * Ejecutar nodo app (api-rest): 
+    * sudo docker run -p 80:8080 -d appImageTag
+    * curl -d "value=ejemplo" -X POST http://localhost:80/item/10
+    * curl http://localhost:80/item/10
+
  * Acceder al contenedor de Docker: sudo docker exec -ti {Contenedor} sh
 
 

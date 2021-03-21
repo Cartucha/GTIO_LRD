@@ -2,8 +2,7 @@ FROM ubuntu:18.04
 
 WORKDIR /tmp/server
 
-#No cambiar PORT
-ENV PORT 3000  
+ENV PORT 8080  
 ENV INSTANCE_ID 1
 ENV PROXYFRONTEND 127.0.0.1:8004 
 
@@ -27,4 +26,4 @@ COPY *.js ./
 
 EXPOSE ${PORT} 
 
-CMD node app.js ${INSTANCE_ID} ${PROXYFRONTEND}
+CMD node app.js ${PORT} ${INSTANCE_ID} ${PROXYFRONTEND}
