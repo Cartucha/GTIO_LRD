@@ -7,7 +7,7 @@ let socket = zmq.socket("router");
 socket.identity = "sequencer";
 
 if (process.argv.length != 3) {
-	console.log("Uso: " + process.argv[1] + "<IP:puerto>");
+	console.log("Uso: " + process.argv[1] + " <IP:puerto>");
 	process.exit(-1);
 }
 let host = process.argv[2];
