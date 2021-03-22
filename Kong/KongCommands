@@ -17,9 +17,9 @@ curl -i -X POST \
 ADD CONSUMER
 curl -i -X POST \
   --url http://localhost:8001/consumers/ \
-  --data "username=Jason"
+  --data "username=LRD"
   
 ADD KEY CONSUMER
 curl -i -X POST \
-  --url http://localhost:8001/consumers/Jason/key-auth/ \
-  --data 'key=Jason'
+  --url http://localhost:8001/consumers/LRD/key-auth/ \
+  --data 'key=LRD'
