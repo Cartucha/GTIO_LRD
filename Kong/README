@@ -1,0 +1,30 @@
+ADD SERVICE
+curl -i -X POST \
+  --url http://localhost:8001/services/ \
+  --data 'name=service' \
+  --data 'url=http://172.18.69.88:80'
+  
+ADD ROUTER GET
+curl -i -X GET \
+  --url http://localhost:8001/services/service/routes \
+  --data 'name=apiGET' --data 'paths[]=/api' --data 'methods[]=GET'
+
+ADD ROUTER POST
+curl -i -X POST \
+  --url http://localhost:8001/services/service/routes \
+  --data 'name=apiPOST' --data 'paths[]=/api' --data 'methods[]=POST'
+  
+ADD PLUGIN AUTHENTICATION
+curl -i -X POST \
+  --url http://localhost:8001/services/service/plugins/ \
+  --data 'name=key-auth'
+
+ADD CONSUMER
+curl -i -X POST \
+  --url http://localhost:8001/consumers/ \
+  --data "username=LRD"
+  
+ADD KEY CONSUMER
+curl -i -X POST \
+  --url http://localhost:8001/consumers/LRD/key-auth/ \
+  --data 'key=LRD'
