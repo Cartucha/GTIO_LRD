@@ -15,31 +15,28 @@ let backend = zmq.socket("router"); // socket para conexion con manejadores
 frontend.identity = "frontend";
 backend.identity = "backend";
 
-// Conectar
+//Escuchar
 frontend.bind("tcp://" + hostF);
 backend.bind("tcp://" + hostB);
 
 let ids = [];
 
-// Reaccion en frontend
 frontend.on("message", (fuente, _, message) => {
-	// Reaccionar
+	//console.log(" Proxyup " + message);
 	let msg = JSON.parse(message.toString());
 	backend.send([msg.dest, "", JSON.stringify(msg)]);
-	console.log(msg);
 });
 
-// Reaccion en backend
 backend.on("message", (fuente, _, message) => {
 	// Comprobar si es mensaje de presentacion
 	if (ids[fuente] == undefined) {
-		console.log("new handler " + fuente);
+		console.log(" Proxyup new handler " + fuente);
 		ids[fuente] = {};
 	} else {
 		// Reaccionar
 		let msg = JSON.parse(message.toString());
 		frontend.send([msg.dest, "", JSON.stringify(msg)]);
-		console.log(msg);
+		//console.log(msg);
 	}
 });
 

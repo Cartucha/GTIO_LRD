@@ -2,8 +2,8 @@ FROM ubuntu:18.04
 
 WORKDIR /tmp/server
 
-ENV PROXYFONTEND 127.0.0.1:8007
-ENV PROXYBACKEND 127.0.0.1:8008 
+ENV PROXYFONTEND 0.0.0.0:8007
+ENV PROXYBACKEND 0.0.0.0:8008 
 
 RUN apt-get update -y
 RUN apt-get install -y apt-utils

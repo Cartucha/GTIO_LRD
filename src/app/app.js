@@ -18,10 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.listen(bindingPort, '0.0.0.0', () => {
- console.log("Server running on port " + bindingPort);
+ console.log("api rest server running on port " + bindingPort);
 });
 
-var isDemo = true;
+var isDemo = false;
 var data = {key: "value"};
 
 app.get('/', function(req, res) { res.send({ codigo: 200, mensaje: 'Punto de inicio' }); });
@@ -34,10 +34,12 @@ app.get("/item/:id", (req, res, next) => {
 		}
 		else {
 			let clt = new CLT(id);
+			console.log(" GET connection to " + host);
 			clt.connect(host);
 			clt.reqCommand({ type: "GET", args: { key: id } });
+			console.log(" GET query item with key " + id);
 			clt.on("ResCommand", (op, res) => {
-				console.log("Respuesta: " + res);
+				console.log("  GET response: " + res);
 				res.json({ key: id, value: res });
 			});
 		}
