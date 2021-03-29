@@ -23,23 +23,21 @@ let ids = [];
 
 // Reaccion en frontend
 frontend.on("message", (fuente, _, message) => {
-	// Reaccionar
+	console.log("Proxydown.message " + message);
 	let msg = JSON.parse(message.toString());
 	backend.send([msg.dest, "", JSON.stringify(msg)]);
-	console.log(msg);
 });
 
 // Reaccion en backend
 backend.on("message", (fuente, _, message) => {
 	// Comprobar si es mensaje de presentacion
 	if (ids[fuente] == undefined) {
-		console.log("new handler " + fuente);
+		console.log("Proxydown new handler " + fuente);
 		ids[fuente] = {};
 	} else {
-		// Reaccionar
+		console.log("Proxydown.backend " + message);
 		let msg = JSON.parse(message.toString());
-		frontend.send([msg.dest, "", JSON.stringify(msg)]);
-		console.log(msg);
+		frontend.send([msg.dest, "", JSON.stringify(msg)]);	
 	}
 });
 
