@@ -24,7 +24,7 @@ class CLT extends events.EventEmitter {
 	constructor(CLTid) {
 		super();
 
-		this.RHIDs = ["h1","h2", "h3"]; // lista de posibles manejadores --> // TODO: rellenar
+		this.RHIDs = ["h1"]; // lista de posibles manejadores ["h1","h2", "h3"]
 		this.id = CLTid;
 
 		this.socket = zmq.socket("dealer");
@@ -46,8 +46,9 @@ class CLT extends events.EventEmitter {
 
 	connect(host) {
 		this.socket.connect("tcp://" + host);
-		// Cuando llega un mensaje
+		console.log(" connected to host " + host);
 		this.socket.on("message", (_, message) => {
+			console.log(" client sending message " + message  +" to host " + host);
 			let msg = JSON.parse(message.toString());
 			if (
 				msg.source == this.rhid &&

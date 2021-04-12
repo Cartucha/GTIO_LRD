@@ -21,18 +21,17 @@ backend.bind("tcp://" + hostB);
 
 let ids = [];
 
-// Reaccion en frontend
 frontend.on("message", (fuente, _, message) => {
-	console.log("Proxydown.message " + message);
+	console.log(" Proxydown.message " + message);
 	let msg = JSON.parse(message.toString());
 	backend.send([msg.dest, "", JSON.stringify(msg)]);
+	console.log("Proxydown.message sended " + message);
 });
 
 // Reaccion en backend
 backend.on("message", (fuente, _, message) => {
-	// Comprobar si es mensaje de presentacion
 	if (ids[fuente] == undefined) {
-		console.log("Proxydown new handler " + fuente);
+		console.log(" Proxydown new handler " + fuente);
 		ids[fuente] = {};
 	} else {
 		console.log("Proxydown.backend " + message);
@@ -41,7 +40,6 @@ backend.on("message", (fuente, _, message) => {
 	}
 });
 
-// El proceso se interrumpe
 process.on("SIGINT", () => {
 	frontend.close();
 	backend.close();

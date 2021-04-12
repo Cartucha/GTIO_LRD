@@ -20,9 +20,8 @@ let i = 0;
 socket.on("message", (fuente, _, message) => {
 	if (ids[fuente] == undefined) {
 		ids[fuente] = {};
-		console.log("New handler: " + fuente);
+		console.log(" New handler: " + fuente);
 	} else {
-		// Añadir datos al mensaje
 		let msg = {
 			s: fuente.toString(),
 			n: i++,

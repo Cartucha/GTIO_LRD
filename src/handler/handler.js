@@ -14,12 +14,12 @@ let hostC = process.argv[3];
 let hostR = process.argv[4];
 let hostTOBE = process.argv[5];
 
-let sequenced = []; // vector de comandos secuenciados
-let localseq = 0; // primera position nula de 'sequenced'
+let sequenced = []; 	// vector de comandos secuenciados
+let localseq = 0; 		// primera position nula de 'sequenced'
 let lastservedseq = -1; // ultimo numero de secuencia utilizado por el manejador
-let mycommands = []; // comandos actualmente a cargo del manejador
-let myreplies = []; // num. secuencia de comandos que espera el manejador
-let ORIDs = ["r1"] //TODO Añadir más replicas , "r2", "r3"];
+let mycommands = []; 	// comandos actualmente a cargo del manejador
+let myreplies = []; 	// num. secuencia de comandos que espera el manejador
+let ORIDs = ["r1"] 		//TODO Añadir más replicas , "r2", "r3"];
 
 let socketC = zmq.socket("dealer"); // socket para clientes
 socketC.identity = id;
@@ -97,10 +97,10 @@ tobe.on("TODeliver", (n, msg) => {
 socketC.connect("tcp://" + hostC);
 socketC.send(["", "Mensaje de presentacion"]);
 socketC.on("message", (_, message) => { // llega mensaje de un cliente
+	console.log(" recived message " + message);
 	let msg = JSON.parse(message.toString());
 	if (msg.dest == id && msg.type == "REQUEST") {
 		let seq = find(msg.cmd, sequenced);
-		// console.log(seq);
 		if (seq == null) {
 			let cmdid = msg.cmd.CLTid + "_" + msg.cmd.opnum;
 			let pkg = {
