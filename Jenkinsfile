@@ -23,8 +23,9 @@ pipeline {
                echo('sudo docker-compose up --build') 
             }
         }
-         stage('Test sistema') {
+         stage('Tests sistema') {
             steps {
+                echo('TODO test de sistema')
                //TODO Probar sin proxy inverso Load,save,Load
                //sh('wget http://localhost:80/item/1' + key)
                //TODO probar los mismo a traves del kong
