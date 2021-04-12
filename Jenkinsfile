@@ -1,5 +1,8 @@
 pipeline {
-    agent any 
+    agent any
+     environment {
+        ROOT_CREDENTIALS = credentials('rootCredentials')
+    } 
     stages {
         stage('Checkout') {
             steps {
@@ -9,7 +12,22 @@ pipeline {
         }
         stage('build') {
             steps {
-               echo('build!') 
+                echo('TODO compile .js!')
+            }
+        }
+        stage('compose') {
+            steps {
+                sh('sudo su ')
+                echo('credenciales ' + ROOT_CREDENTIALS_USR)
+                echo('' + ROOT_CREDENTIALS_PSW)
+               echo('sudo docker-compose up --build') 
+            }
+        }
+         stage('Test sistema') {
+            steps {
+               //TODO Probar sin proxy inverso Load,save,Load
+               //sh('wget http://localhost:80/item/1' + key)
+               //TODO probar los mismo a traves del kong
             }
         }
     }
