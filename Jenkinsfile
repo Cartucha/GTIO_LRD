@@ -17,10 +17,7 @@ pipeline {
         }
         stage('compose') {
             steps {
-                sh('sudo su ')
-                echo('credenciales ' + ROOT_CREDENTIALS_USR)
-                echo('' + ROOT_CREDENTIALS_PSW)
-               echo('sudo docker-compose up --build') 
+                sh('docker-compose up --build') 
             }
         }
          stage('Tests sistema') {
