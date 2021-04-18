@@ -8,6 +8,7 @@
   * Kong http://172.18.69.89:8001 
   * Konga http://172.18.69.89:1337
   * Jenkins http://172.18.69.88:8080/
+  * Portainer http://172.18.69.89:9000
 
 # ADRs 
 * [ADR_001-Metodologia a usar.md](./doc/adr/ADR_001-Metodologia%20a%20usar.md)
