@@ -17,6 +17,7 @@
 * [ADR-004-herramientas-gestion-configuracion-del-proyecto.md](./doc/adr/ADR-004-herramientas-gestion-configuracion-del-proyecto.md)
 * [ADR-005-modelo-soporte.md](./doc/adr/ADR-005-modelo-soporte.md)
 * [ADR_006-Arquitectura-de-la-aplicación.md](./doc/adr/ADR_006-Arquitectura-de-la-aplicación.md)
+* [ADR_007-Herramientas-IC-pipelines](./doc/adr/ADR_007-Herramientas-IC-pipelines.md)
 
 # Microservicios
 * App
