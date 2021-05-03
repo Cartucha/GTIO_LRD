@@ -17,7 +17,7 @@ pipeline {
         }
         stage('compose') {
             steps {
-                sh('docker-compose up --build --detach') 
+                sh('sudo docker-compose up --build --detach') 
             }
         }
          stage('Tests sistema') {

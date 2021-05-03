@@ -16,4 +16,4 @@ RUN sudo chmod +x /usr/local/bin/docker-compose
 USER jenkins
 
 #sudo docker build --tag mijenkins .
-#sudo docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenki_home -v /var/run/docker.sock:/var/run/docker.sock  mijenkins
+#sudo docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/local/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock  mijenkins
