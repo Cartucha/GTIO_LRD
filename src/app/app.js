@@ -62,8 +62,8 @@ app.post("/item/:id", (req, res, next) => {
 			let clt = new CLT(id);
 			clt.connect(host);
 			clt.reqCommand({ type: "PUT", args: { key: id, value: value} });
-			clt.on("ResCommand", (op, res) => {
-				console.log("Respuesta: " + res);
+			clt.on("ResCommand", (op, replicatorResponse) => {
+				console.log("Respuesta: " + replicatorResponse);
 				res.json({
 					mensaje: 'Clave actualizada ' + id,
 					value: value
