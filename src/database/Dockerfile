@@ -23,4 +23,4 @@ RUN mv /tmp/server/node_modules/.zmq.DELETE /tmp/server/node_modules/zmq
 #Copiar codigo fuente
 COPY *.js ./
 
-CMD node createdb.js r${INSTANCE_ID}/ && node object.js r${INSTANCE_ID} ${PROXYBACKEND} db${INSTANCE_ID}/
+CMD node createdb.js db${INSTANCE_ID}/ && node object.js r${INSTANCE_ID} ${PROXYBACKEND} db${INSTANCE_ID}/

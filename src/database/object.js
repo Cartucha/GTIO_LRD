@@ -25,9 +25,11 @@ socket.connect("tcp://" + host);
 
 const execute = async (type, args) => {
 	if (type == "PUT") {
+		console.log(" PUT key: " + args.key + " value: " + args.value);
 		db.put(args.key, args.value);
 		return "OK";
 	} else {
+		console.log(" GET key: " + args.key);
 		let res;
 		let promiss = db.get(args.key);
 		await promiss.then((value) => {

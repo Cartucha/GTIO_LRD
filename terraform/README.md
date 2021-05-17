@@ -30,6 +30,12 @@ aws ec2 run-instances --instance-type t2.micro --count 1 --region us-east-1 --ke
 # Conectar a la instancia (si no conecta probar sudo o -v para ver log)
 ssh -i id_rsa ec2-user@54.209.251.211
 
+
+
+# Notas: Como descargar la aplicación
+rm -f main.zip && rm -f ./main && wget https://github.com/Cartucha/GTIO_LRD/archive/refs/heads/main.zip && unzip main.zip
+
+
 "VpcId": "vpc-b739b6ca",
 
 # Propuesta de aitor ami-0babb0c4a4e5769b8 amzn2-ami-ecs-hvm-2.0.20210428-x86_64-ebs 

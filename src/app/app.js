@@ -38,9 +38,9 @@ app.get("/item/:id", (req, res, next) => {
 			clt.connect(host);
 			clt.reqCommand({ type: "GET", args: { key: id } });
 			console.log(" GET query item with key " + id);
-			clt.on("ResCommand", (op, res) => {
-				console.log("  GET response: " + res);
-				res.json({ key: id, value: res });
+			clt.on("ResCommand", (op, replicatorResponse) => {
+				console.log("  GET response: " + replicatorResponse);
+				res.json({ key: id, value: replicatorResponse });
 			});
 		}
 	}

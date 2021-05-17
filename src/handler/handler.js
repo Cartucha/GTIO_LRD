@@ -97,8 +97,10 @@ tobe.on("TODeliver", (n, msg) => {
 socketC.connect("tcp://" + hostC);
 socketC.send(["", "Mensaje de presentacion"]);
 socketC.on("message", (_, message) => { // llega mensaje de un cliente
-	console.log(" recived message " + message);
+
+	console.log(id + " recived message  " + message);
 	let msg = JSON.parse(message.toString());
+
 	if (msg.dest == id && msg.type == "REQUEST") {
 		let seq = find(msg.cmd, sequenced);
 		if (seq == null) {
@@ -107,6 +109,8 @@ socketC.on("message", (_, message) => { // llega mensaje de un cliente
 				source: id,
 				cmd: msg.cmd
 			};
+			console.log(" Broadcast cmdid " + cmdid + " " + JSON.stringify(pkg));
+
 			tobe.TOBroadcast(JSON.stringify(pkg));
 			mycommands[cmdid] = msg.cmd;
 		} else {

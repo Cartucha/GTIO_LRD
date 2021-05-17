@@ -32,8 +32,8 @@ backend.on("message", (fuente, _, message) => {
 		console.log(" Proxyup new handler " + fuente);
 		ids[fuente] = {};
 	} else {
-		console.log("  Proxyup.backend " + msg);
 		let msg = JSON.parse(message.toString());
+		console.log("  Proxyup.backend " + msg);
 		frontend.send([msg.dest, "", JSON.stringify(msg)]);
 	}
 });

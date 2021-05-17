@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 WORKDIR /tmp/server
 
 ENV PORT 8003
-ENV PROXY 127.0.0.1
+ENV PROXY 0.0.0.0
 
 RUN apt-get update -y
 RUN apt-get install -y apt-utils
