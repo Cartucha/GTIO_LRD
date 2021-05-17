@@ -20,7 +20,7 @@ pipeline {
                 sh('sudo su ')
                 echo('credenciales ' + ROOT_CREDENTIALS_USR)
                 echo('' + ROOT_CREDENTIALS_PSW)
-               echo('sudo docker-compose up --build') 
+                //echo('sudo docker-compose up --build') 
             }
         }
          stage('Tests sistema') {
