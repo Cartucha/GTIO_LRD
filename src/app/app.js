@@ -17,14 +17,20 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+let clt = null;
+
 app.listen(bindingPort, '0.0.0.0', () => {
- console.log("api rest server running on port " + bindingPort);
+	clt = new CLT(appId);
+	console.log(" Connecting  to " + host);
+	clt.connect(host);
+	console.log("api rest server running on port " + bindingPort);
 });
 
 var isDemo = false;
 var data = {key: "value"};
 
 app.get('/', function(req, res) { res.send({ codigo: 200, mensaje: 'Punto de inicio' }); });
+
 app.get("/item/:id", (req, res, next) => {
 	if((!req.params.id && !req.body.id)) { res.send({ codigo: 502, mensaje: 'Falta id en url o como campo'} );} 
 	else {
@@ -33,11 +39,8 @@ app.get("/item/:id", (req, res, next) => {
 			res.json({ key: id, value: data[id+'']+'' });
 		}
 		else {
-			let clt = new CLT(id);
-			console.log(" GET connection to " + host);
-			clt.connect(host);
 			clt.reqCommand({ type: "GET", args: { key: id } });
-			console.log(" GET query item with key " + id);
+			console.log(" GET send message query item with key " + id);
 			clt.on("ResCommand", (op, replicatorResponse) => {
 				console.log("  GET response: " + replicatorResponse);
 				res.json({ key: id, value: replicatorResponse });
@@ -59,8 +62,6 @@ app.post("/item/:id", (req, res, next) => {
 			});
 		}
 		else{
-			let clt = new CLT(id);
-			clt.connect(host);
 			clt.reqCommand({ type: "PUT", args: { key: id, value: value} });
 			clt.on("ResCommand", (op, replicatorResponse) => {
 				console.log("Respuesta: " + replicatorResponse);

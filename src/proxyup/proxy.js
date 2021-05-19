@@ -22,7 +22,7 @@ backend.bind("tcp://" + hostB);
 let ids = [];
 
 frontend.on("message", (fuente, _, message) => {
-	//console.log(" Proxyup.frontend " + message);
+	console.log(" Proxyup.frontend " + message);
 	let msg = JSON.parse(message.toString());
 	backend.send([msg.dest, "", JSON.stringify(msg)]);
 });
