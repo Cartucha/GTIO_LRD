@@ -8,6 +8,7 @@
   * Kong http://172.18.69.89:8001 
   * Konga http://172.18.69.89:1337
   * Jenkins http://172.18.69.88:8080/
+  * Portainer http://172.18.69.89:9000
 
 # ADRs 
 * [ADR_001-Metodologia a usar.md](./doc/adr/ADR_001-Metodologia%20a%20usar.md)
@@ -16,6 +17,7 @@
 * [ADR-004-herramientas-gestion-configuracion-del-proyecto.md](./doc/adr/ADR-004-herramientas-gestion-configuracion-del-proyecto.md)
 * [ADR-005-modelo-soporte.md](./doc/adr/ADR-005-modelo-soporte.md)
 * [ADR_006-Arquitectura-de-la-aplicación.md](./doc/adr/ADR_006-Arquitectura-de-la-aplicación.md)
+* [ADR_007-Herramientas-IC-pipelines](./doc/adr/ADR_007-Herramientas-IC-pipelines.md)
 
 # Microservicios
 * App

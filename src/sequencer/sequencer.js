@@ -14,10 +14,11 @@ let host = process.argv[2];
 
 socket.bind("tcp://"+ host);
 
-let ids = []; // ["h1", "h2", "h3"];
+let ids = ["h1"]; // ["h1", "h2", "h3"];
 let i = 0;
 
 socket.on("message", (fuente, _, message) => {
+	console.log(fuente + " recived message " + message)
 	if (ids[fuente] == undefined) {
 		ids[fuente] = {};
 		console.log(" New handler: " + fuente);

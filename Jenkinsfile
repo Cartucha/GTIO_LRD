@@ -1,8 +1,8 @@
 pipeline {
     agent any
-     environment {
-        ROOT_CREDENTIALS = credentials('rootCredentials')
-    } 
+   // environment {
+   //     ROOT_CREDENTIALS = credentials('rootCredentials') no es necesario
+   // } 
     stages {
         stage('Checkout') {
             steps {
@@ -12,15 +12,12 @@ pipeline {
         }
         stage('build') {
             steps {
-                echo('TODO compile .js!')
+                echo('TODO linter .js')
             }
         }
         stage('compose') {
             steps {
-                sh('sudo su ')
-                echo('credenciales ' + ROOT_CREDENTIALS_USR)
-                echo('' + ROOT_CREDENTIALS_PSW)
-                //echo('sudo docker-compose up --build') 
+                sh('sudo docker-compose up --build --detach') 
             }
         }
          stage('Tests sistema') {
