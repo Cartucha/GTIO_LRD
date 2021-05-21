@@ -23,13 +23,13 @@ pipeline {
          stage('Tests sistema') {
             steps {
                 script {
-                    echo('Test de sistema')
-                    def apiUrl = "http://localhost:88/item"
-                    def itemId = 1;
-                    sh("curl ${apiUrl}/${itemId}")
-                    sh("curl --request POST --header \"Content-type: application/json\" --data '{\"value\":\"a1\"}' ${apiUrl}/${itemId}")
-                    sh("curl ${apiUrl}/${itemId}")
-                    //TODO checkear las respuestas
+                    def apiUrl = "http://172.18.69.88:88/item"
+                    def itemId = env.BUILD_NUMBER;
+                    def expectedValue = "m"+ itemId;
+                    sh("curl --silent ${apiUrl}/${itemId}")
+                    sh("curl --silent --request POST --header \"Content-type: application/json\" --data '{\"value\":\"${expectedValue}\"}' ${apiUrl}/${itemId}")
+                    def value = sh(script: "curl --silent ${apiUrl}/${itemId} | jq -r '.value'", returnStdout: true).trim()
+                    if (expectedValue != value) { error("Test de sistema, Api ${apiUrl} expected value ${expectedValue} but ${value}") } else { echo("Test de sistema, Ok") }
                     //TODO probar los mismo a traves del kong
                 } 
             }

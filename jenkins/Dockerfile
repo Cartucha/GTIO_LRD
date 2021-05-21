@@ -6,7 +6,7 @@ RUN apt-get install sudo -y
 RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 USER root
-RUN apt-get update && apt-get install sudo
+RUN apt-get update && apt-get install sudo && apt-get install jq
 
 # Use docker daemon of host, no work ip-tables compatibilty
 #RUN curl -fsSL https://get.docker.com -o get-docker.sh
