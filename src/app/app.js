@@ -18,58 +18,49 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let clt = null;
+var isDemo = false;
+var data = {key: "value"};
 
 app.listen(bindingPort, '0.0.0.0', () => {
 	clt = new CLT(appId);
-	console.log(" Connecting  to " + host);
+	console.log("connecting... to " + host);
 	clt.connect(host);
 	console.log("api rest server running on port " + bindingPort);
 });
 
-var isDemo = false;
-var data = {key: "value"};
+app.get('/', function(req, res) { 
+	res.send({ mensaje: 'Punto de inicio' });
+ });
 
-app.get('/', function(req, res) { res.send({ codigo: 200, mensaje: 'Punto de inicio' }); });
+app.get("/item/:id", (req, res) => {
+	new Promise((resolve, reject) => {
+		if((!req.params.id && !req.body.id)) { reject('Falta id en url o como campo'); } 
+		const id = +(req.params.id || req.body.id);
+		if (isDemo) { resolve({ key: id, value: data[id+'']+'' });}
 
-app.get("/item/:id", (req, res, next) => {
-	if((!req.params.id && !req.body.id)) { res.send({ codigo: 502, mensaje: 'Falta id en url o como campo'} );} 
-	else {
-		var id = req.params.id || req.body.id;
-		if (isDemo) {
-			res.json({ key: id, value: data[id+'']+'' });
-		}
-		else {
-			clt.reqCommand({ type: "GET", args: { key: id } });
-			console.log(" GET send message query item with key " + id);
-			clt.on("ResCommand", (op, replicatorResponse) => {
-				console.log("  GET response: " + replicatorResponse);
-				res.json({ key: id, value: replicatorResponse });
-			});
-		}
-	}
+		clt.reqCommand({ type: "GET", args: { key: id } });
+		clt.once("ResCommand", (op, replicatorResponse) => {
+			console.log("GET " + id + "-->" + replicatorResponse);
+			resolve({ key: id, value: replicatorResponse });
+		});
+	})
+	.then(item => { res.json(item); })
+	.catch(reason =>{ res.json({ key: null, value: reason}) });
 });
 
 app.post("/item/:id", (req, res, next) => {
-	if((!req.params.id && !req.body.id)) { res.send({ codigo: 502, mensaje: 'Falta id en url o como campo' });} 
-	else {
-		var id = req.params.id || req.body.id;
-		var value = req.body.value; 
-		if (isDemo) {
-			data[id+""] = value;
-			res.json({
-				mensaje: 'Clave actualizada ' + id,
-				value: value + ''
-			});
-		}
-		else{
-			clt.reqCommand({ type: "PUT", args: { key: id, value: value} });
-			clt.on("ResCommand", (op, replicatorResponse) => {
-				console.log("Respuesta: " + replicatorResponse);
-				res.json({
-					mensaje: 'Clave actualizada ' + id,
-					value: value
-				});
-			});
-		}
-	}
+	new Promise((resolve, reject) => {
+		const id = req.params.id || req.body.id;
+		if((!req.params.id && !req.body.id)) { reject('Falta id en url o como campo'); } 
+		if (isDemo) { resolve({ mensaje: "clave actualizada:" + id, value: req.body.value+'' });}
+
+		const data = req.body.value;
+		clt.reqCommand({ type: "PUT", args: { key: id, value: data} });
+		clt.once("ResCommand", (op, replicatorResponse) => {
+			console.log("POST " + id + "=" + data + "-->" + replicatorResponse);
+			resolve({ mensaje: "clave actualizada:" + id, value: data });
+		});
+	})
+	.then(item => { res.json(item); })
+	.catch(reason =>{ res.json({ mensaje:reason, value: null}) });
 })	

@@ -46,8 +46,9 @@ class CLT extends events.EventEmitter {
 
 	connect(host) {
 		this.socket.connect("tcp://" + host);
-		console.log(" connected to host " + host);
+		console.log("connected to host " + host);
 		this.socket.on("message", (_, message) => {
+			console.log(message.toString());
 			let msg = JSON.parse(message.toString());
 			if (
 				msg.source == this.rhid &&
@@ -61,7 +62,7 @@ class CLT extends events.EventEmitter {
 				this.count++;
 				this.delta = Math.floor(this.sum / this.count * 2);
 				if (!this.adaptative_delta) {
-					this.delta = 10 * 1000;
+					this.delta = 1000;
 				}
 				this.emit("ResCommand", msg.op, msg.res); // evento de respuesta obtenida
 			}
@@ -98,7 +99,6 @@ class CLT extends events.EventEmitter {
 				this.timeout = setTimeout(timeoutFunc, this.delta);
 			}
 			this.time = Date.now();
-			console.log("sending to " + this.host + " " + JSON.stringify(msg));
 			this.socket.send(["", JSON.stringify(msg)]);
 			this.timeout = setTimeout(timeoutFunc, this.delta);
 		} else {

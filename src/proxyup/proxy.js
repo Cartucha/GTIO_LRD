@@ -22,18 +22,18 @@ backend.bind("tcp://" + hostB);
 let ids = [];
 
 frontend.on("message", (fuente, _, message) => {
-	console.log(" Proxyup.frontend " + message);
+	//console.log(message);
 	let msg = JSON.parse(message.toString());
 	backend.send([msg.dest, "", JSON.stringify(msg)]);
 });
 
 backend.on("message", (fuente, _, message) => {
 	if (ids[fuente] == undefined) {
-		console.log(" Proxyup new handler " + fuente);
+		console.log("new handler " + fuente);
 		ids[fuente] = {};
 	} else {
+		//console.log(message);
 		let msg = JSON.parse(message.toString());
-		console.log("  Proxyup.backend " + msg);
 		frontend.send([msg.dest, "", JSON.stringify(msg)]);
 	}
 });

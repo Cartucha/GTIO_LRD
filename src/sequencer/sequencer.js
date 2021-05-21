@@ -21,7 +21,7 @@ socket.on("message", (fuente, _, message) => {
 	console.log(fuente + " recived message " + message)
 	if (ids[fuente] == undefined) {
 		ids[fuente] = {};
-		console.log(" New handler: " + fuente);
+		console.log("new handler: " + fuente);
 	} else {
 		let msg = {
 			s: fuente.toString(),

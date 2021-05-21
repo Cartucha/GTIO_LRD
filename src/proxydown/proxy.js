@@ -22,19 +22,18 @@ backend.bind("tcp://" + hostB);
 let ids = [];
 
 frontend.on("message", (fuente, _, message) => {
-	console.log(" Proxydown.message " + message);
+	//console.log(message);
 	let msg = JSON.parse(message.toString());
 	backend.send([msg.dest, "", JSON.stringify(msg)]);
-	console.log("Proxydown.message sended " + message);
+	
 });
 
-// Reaccion en backend
 backend.on("message", (fuente, _, message) => {
 	if (ids[fuente] == undefined) {
-		console.log(" Proxydown new handler " + fuente);
+		console.log("new handler " + fuente);
 		ids[fuente] = {};
 	} else {
-		console.log("Proxydown.backend " + message);
+		console.log(message.toString());
 		let msg = JSON.parse(message.toString());
 		frontend.send([msg.dest, "", JSON.stringify(msg)]);	
 	}

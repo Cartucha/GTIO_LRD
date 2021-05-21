@@ -29,11 +29,12 @@ const execute = async (type, args) => {
 		db.put(args.key, args.value);
 		return "OK";
 	} else {
-		console.log(" GET key: " + args.key);
 		let res;
 		let promiss = db.get(args.key);
 		await promiss.then((value) => {
 			res = value;
+		}).catch(reason => {
+			res = null;
 		});
 		return res;
 	}
@@ -56,7 +57,6 @@ socket.on("message", async (_, message) => { // llega un mensaje
 					cmd: pair.cmd,
 					res: res
 				}
-				console.log(res);
 				let pkg = {
 					source: id,
 					dest: pair.source,

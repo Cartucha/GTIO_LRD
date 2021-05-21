@@ -22,9 +22,13 @@ pipeline {
         }
          stage('Tests sistema') {
             steps {
-                echo('TODO test de sistema')
-               //TODO Probar sin proxy inverso Load,save,Load
-               //sh('wget http://localhost:80/item/1' + key)
+                echo('Test de sistema')
+                def apiUrl = "http://localhost:88/item"
+                def itemId = 1;
+                sh("curl ${apiUrl}/${itemId}")
+                sh("curl --request POST --header \"Content-type: application/json\" --data '{\"value\":\"a1\"}' ${apiUrl}/${itemId}")
+                sh("curl ${apiUrl}/${itemId}")
+                //TODO checkear las respuestas
                //TODO probar los mismo a traves del kong
             }
         }
