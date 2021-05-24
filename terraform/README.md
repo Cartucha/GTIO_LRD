@@ -1,5 +1,53 @@
 
-== Es requisito para usar terraform, instalar y configurar el cli de amazon
+== Terraform
+
+# Iniciar sesión https://www.awseducate.com/signin/SiteLogin e con correo like marzo.48821@e.unavarra.es
+# Las credenciales son solo validas para una sesión de max 3h
+ 
+=== Instalar terraform 
+
+wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip 
+unzip terraform_0.15.4_linux_amd64.zip 
+sudo mv terraform /usr/local/bin/
+terraform -v
+    Terraform v0.15.4
+    on linux_amd64
+
+=== Configurar las credenciales de acceso a aws (cambian en cada sesión)
+export AWS_ACCESS_KEY_ID=ASIA4HBFJCOZUZSGNMAQ
+export AWS_SECRET_ACCESS_KEY=lW07hOzOJRCB5hnl8vhV0/UR8YsNzDU9ajSo0DMb
+export -p | grep AWS_
+
+#Al ser una cuenta aws educate, es necesario tambien
+export AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjEFAaCXVzLXdlc3QtMiJGMEQCIF3hZik6vlaJXbKsdNhu5iDYmBQcBMEMBGFKhDvqHzFFAiBPgwC9tfVw7xaYXgeZMA7EzT/DUsM+CD1pbYgCfaG7lSq7Agjp//////////8BEAAaDDgzOTc0NDI5NTg1OSIM63zo+rou6ffKrKjDKo8Cspr5Whh1GF/SIntinYktvy6mOppa3hxwiKSi/vVnVkMr0Solzf8WjuOhK/drTrCkRRsXWB14VLe8ONo9+lJJt5X9bptD+eB6oiV0eJPxzm9BnWCCrKqFI3oRCI6fcxI6J9IStVj8HdvhkS9sOZmgn7TzDBIinWvNPpoHexBnGj9770zU13MC2cSqxGsoRy0+Bi2mRJB8ShEs06hjwMTg/Wb1xLPbA6VvoOiNQ74ty/LpAUpoeSlEnJB6TOrYxa4kiBUKd5irE/fvKjpRGrPzPwteLliD3TTQ5k/TbSeTgi+aqmz4Xo8xbPm9uNlbFlUXmgZe709sb3DDvaz9r1f1KOv9DIXZ5Jy7M1r1v+OdKjC/sa2FBjqeAQ/cbRNCWNB1P6nQYjfarwpaeJURTgVcqHDLsG+GlI6fxKq7mf5GKR3Z3Y/qa+pdiMb+C2B2iaCL+IiUBiJPELl4/vkfNoB9Hld8IMdHbfP5tXBJWa0Nt7mTIwwHb+c8AADjNjoF75I42GSK4rbpRgUVSXb8b/y1A0moYovhCDV+QKMbx/wvupe+bImIu+S7/q00aat+aX31ts0yQxox
+
+=== Operar con terraform
+cd ./terraform
+terraform init
+
+# se puede ver que hara al aplicar main.tf
+terraform plan
+
+# aplicarlo sin preguntar
+terraform apply -auto-approve
+
+# destruir todos los recursos generador
+terraform apply -destroy
+
+#TODO
+ - Seguir ejemplo https://blog.gruntwork.io/an-introduction-to-terraform-f17df9c6d180 (no conecta por http -> configurar acceso ssh)
+ - Como subir al registro de amazon las imagenes de docker generador en jenkins, o generarlas en amazon
+ - Ejecutar docker-compose up en una magina grande
+ - Configurar cluster ecs para cada componente
+
+# Como crear clave publica/privada para conectar
+$ cd ~/.ssh/ && ssh-keygen -m PEM
+
+# Como conectar por ssh a la instancia
+terraform output 
+ssh -i ~/.ssh/aws_replicador ec2-user@52.6.42.100
+
+=== Pruebas con el cli de aws
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
      && unzip awscliv2.zip \ 
@@ -9,7 +57,7 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 $ aws --version
 $ aws-cli/2.2.2 Python/3.8.8 Linux/4.15.0-135-generic exe/x86_64.ubuntu.18 prompt/off
 # Configurar las credenciales
-# Iniciar sesión https://www.awseducate.com/signin/SiteLogin con correo like marzo.48821@e.unavarra.es
+# Iniciar sesión e con correo like marzo.48821@e.unavarra.es
 # Las credenciales cambian cada vez que se inciia sesión, sobreescribir ~/.aws/crendentials     
 [default]
 aws_access_key_id=ASIA4HBFJCOZSXV3QVHZ
@@ -29,7 +77,6 @@ $ cd ~/.ssh/ && ssh-keygen -m PEM
 aws ec2 run-instances --instance-type t2.micro --count 1 --region us-east-1 --key-name david --image-id resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 
 # Conectar a la instancia (si no conecta probar sudo o -v para ver log)
 ssh -i id_rsa ec2-user@54.209.251.211
-
 
 
 # Notas: Como descargar la aplicación
@@ -64,6 +111,9 @@ aws ssm get-parameters-by-path --path /aws/service/ami-amazon-linux-latest --que
     "/aws/service/ami-amazon-linux-latest/amzn-ami-pv-x86_64-ebs",
     "/aws/service/ami-amazon-linux-latest/amzn2-ami-minimal-hvm-x86_64-ebs"
 ]
+
+
+
 
 
 

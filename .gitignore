@@ -325,3 +325,5 @@ src/app/node_modules/vary/LICENSE
 src/app/node_modules/vary/package.json
 src/app/node_modules/vary/README.md
 src/app/npm-debug.log
+terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/3.42.0/linux_amd64/terraform-provider-aws_v3.42.0_x5
+terraform/.terraform.lock.hcl
